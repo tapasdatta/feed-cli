@@ -36,16 +36,16 @@ abstract class BaseImporter implements ImporterInterface
 
             $batch[] = $this->mapper->map($row);
 
-            // if (count($batch) >= $this->batchSize) {
-            //     $this->repository->saveBatch($batch);
-            //     $batch = [];
-            // }
+            if (count($batch) >= $this->batchSize) {
+                $this->repository->saveBatch($batch);
+                $batch = [];
+            }
         }
 
         // flush remaining rows
-        // if ($batch !== []) {
-        //     $this->repository->saveBatch($batch);
-        // }
+        if ($batch !== []) {
+            $this->repository->saveBatch($batch);
+        }
 
         return $result;
     }
