@@ -21,9 +21,21 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\Products\ProductFeedImporter:
-        tags: ["app.importer"]
 
+    # Importer Resolver
     App\Importer\ImporterResolver:
         arguments:
-            $importers: !tagged_iterator app.importer
+            $importers:
+                products: '@App\Products\ProductFeedImporter'
+
+    # Reader Resolver
+    App\Importer\FeedReaderResolver:
+        arguments:
+            $readers:
+                csv: '@App\Importer\CsvFeedReader'
+
+    App\Products\ProductFeedImporter:
+        bind:
+            App\Importer\Contracts\RowMapperInterface: '@App\Products\ProductRowMapper'
+            App\Importer\Contracts\RowValidatorInterface: '@App\Products\ProductRowValidator'
+            App\Importer\Contracts\RepositoryInterface: '@App\Products\ProductRepository'

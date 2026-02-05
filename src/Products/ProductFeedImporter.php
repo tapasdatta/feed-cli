@@ -2,8 +2,9 @@
 
 namespace App\Products;
 
+use App\Importer\BaseImporter;
 
-class ProductFeedImporter
+class ProductFeedImporter extends BaseImporter
 {
     public function key(): string
     {

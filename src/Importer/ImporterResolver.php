@@ -6,11 +6,10 @@ use InvalidArgumentException;
 
 final class ImporterResolver
 {
-    private iterable $importers;
 
-    public function __construct(iterable $importers)
+    public function __construct(private array $importers)
     {
-        $this->importers = $importers;
+        //
     }
 
     public function resolve(string $key)

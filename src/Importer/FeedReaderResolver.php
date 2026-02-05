@@ -4,9 +4,9 @@ namespace App\Importer;
 
 use App\Importer\Contracts\FeedReaderInterface;
 
-class FeedReaderResolver
+final class FeedReaderResolver
 {
-    public function __construct(protected array $readers) {}
+    public function __construct(private array $readers) {}
 
     public function resolve(string $type): FeedReaderInterface
     {
